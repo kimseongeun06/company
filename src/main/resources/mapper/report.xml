@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/schema/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo.report.db.ReportMapper">
+    <select id="getReportList" parameterType="Map" resultType="com.demo.report.db.Report">
+        SELECT IDX
+        , TITLE
+        , CONTENT
+        , LINEUSE
+        , LONGLINEUSE
+        , CHOOSEUSE
+        , MORECHOOSEUSE
+        , RETIME
+        , TIME
+        FROM REPORT
+        WHERE 1=1
+
+        <if test="sk != '' || sk != null">
+            <if test="sk == 'title'">
+                AND TITLE LIKE CONCAT('%', #{sv}, '%')
+            </if>
+            <if test="sk == 'content'">
+                AND CONTENTS LIKE CONCAT('%', #{sv}, '%')
+            </if>
+            <if test="sk == 'lineuse'">
+                AND CONTENTS LIKE CONCAT('%', #{sv}, '%')
+            </if>
+            <if test="sk == 'longlineuse'">
+                AND CONTENTS LIKE CONCAT('%', #{sv}, '%')
+            </if>
+            <if test="sk == 'chooseuse'">
+                AND CONTENTS LIKE CONCAT('%', #{sv}, '%')
+            </if>
+            <if test="sk == 'morechooseuse'">
+                AND CONTENTS LIKE CONCAT('%', #{sv}, '%')
+            </if>
+        </if>
+        ORDER BY IDX DESC
+
+    </select>
+
+    <select id="getReportTotalCount" parameterType="Map" resultType="Int">
+        SELECT COUNT(IDX)
+        FROM REPORT
+        WHERE 1=1
+        <if test="sk != '' || sk != null">
+            <if test="sk == 'title'">
+                AND TITLE LIKE CONCAT('%', #{sv}, '%')
+            </if>
+            <if test="sk == 'content'">
+                AND CONTENTS LIKE CONCAT('%', #{sv}, '%')
+            </if>
+            <if test="sk == 'lineuse'">
+                AND CONTENTS LIKE CONCAT('%', #{sv}, '%')
+            </if>
+            <if test="sk == 'longlineuse'">
+                AND CONTENTS LIKE CONCAT('%', #{sv}, '%')
+            </if>
+            <if test="sk == 'chooseuse'">
+                AND CONTENTS LIKE CONCAT('%', #{sv}, '%')
+            </if>
+            <if test="sk == 'morechooseuse'">
+                AND CONTENTS LIKE CONCAT('%', #{sv}, '%')
+            </if>
+        </if>
+    </select>
+
+    <select id="getReportOne" parameterType="Long" resultType="com.demo.report.db.Report">
+        SELECT IDX
+        , TITLE
+        , CONTENT
+        , LINEUSE
+        , LONGLINEUSE
+        , CHOOSEUSE
+        , MORECHOOSEUSE
+        , RETIME
+        , TIME
+        FROM REPORT
+        WHERE IDX = #{idx}
+    </select>
+
+    <insert id="insertReport" parameterType="com.demo.report.db.Report" keyProperty="idx" useGeneratedKeys="true">
+        INSERT INTO REPORT
+        (
+        TITLE
+        , CONTENT
+        , LINEUSE
+        , LONGLINEUSE
+        , CHOOSEUSE
+        , MORECHOOSEUSE
+        , RETIME
+        , TIME
+        ) VALUES (
+        #{title}
+        , #{content}
+        , #{lineuse}
+        , #{longlineuse}
+        , #{chooseuse}
+        , #{morechooseuse}
+        , NOW()
+        , NOW()
+        )
+    </insert>
+
+    <update id="updateReport" parameterType="com.demo.report.db.Report">
+        UPDATE REPORT
+        SET TITLE = #{title}
+        , CONTENT = #{content}
+        , LINEUSE = #{lineuse}
+        , LONGLINEUSE = #{longlineuse}
+        , CHOOSEUSE = #{chooseuse}
+        , MORECHOOSEUSE = #{morechooseuse}
+        , RETIME = NOW()
+        WHERE IDX = #{idx}
+    </update>
+
+    <delete id="deleteReport" parameterType="Long">
+        DELETE FROM REPORT
+        WHERE IDX = #{idx}
+    </delete>
+</mapper>

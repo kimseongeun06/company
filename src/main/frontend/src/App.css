@@ -1,0 +1,29 @@
+.App {
+float: right;
+width: 100vw;
+height: 100vh;
+margin-left: 10px;
+
+}
+
+body{
+margin:0;
+padding:0;
+}
+
+.Sidebar{
+float: left;
+height:900px;
+width: 250px;
+background-color:#f1f1f1;
+margin-left: 25px;
+margin-right:25px;
+
+}
+
+.Header{
+float: left;
+width:100%;
+margin-left: 20px;
+
+}
